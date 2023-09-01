@@ -1,0 +1,16 @@
+#include <gtest/gtest.h>
+#include "export_interface.h"
+#include "dll_proxy.h"
+#include "dir_opt.h"
+
+TEST(exportTestCase, testAdd) {
+    auto curr_path = getCurrentModPath();
+    auto file = curr_path + "\\export.dll";
+    DllProxyPtr dll_proxy = std::make_shared<DllProxy>(file);
+
+    using create_obj_type = ExportInterface*();
+    using destroy_obj_type = void(ExportInterface*);
+    auto obj = dll_proxy->call<create_obj_type>("createExportObj");
+    EXPECT_EQ(obj->add(1, 6), 7);
+    dll_proxy->call<destroy_obj_type>("destroyExportObj", obj);
+}
