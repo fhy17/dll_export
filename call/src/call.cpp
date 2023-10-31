@@ -11,7 +11,7 @@ int main() {
     auto file = curr_path + "\\export.dll";
     {
         // Use DllProxy to call dll directly
-        std::string file = "export.dll";
+        // std::string file = "export.dll";
         DllProxyPtr dll_proxy = std::make_shared<DllProxy>(file);
         {
             using type = int(int, int);
@@ -41,7 +41,7 @@ int main() {
     }
     {
         // Use DllProxy to call dll directly
-        std::string file = "export.dll";
+        // std::string file = "export.dll";
         DllProxyPtr dll_proxy = std::make_shared<DllProxy>(file);
         {
             using create_obj_type = ExportInterface*();
@@ -79,5 +79,6 @@ int main() {
         }
     }
 #endif
+
     return 0;
 }

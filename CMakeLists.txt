@@ -55,37 +55,43 @@ endif()
 # set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2")
 # set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
 
+find_program(CPPCHECK_PATH cppcheck REQUIRED)
+if(CPPCHECK_PATH)
+    message("Found cppcheck: ${CPPCHECK_PATH}")
+else()
+    message(FATAL_ERROR "cppcheck not found.")
+endif()
 
 message(STATUS "CMAKE_CXX_FLAGS: " ${CMAKE_CXX_FLAGS})
 
 # message("CMAKE_CURRENT_SOURCE_DIR " ${CMAKE_CURRENT_SOURCE_DIR})
 # message("CMAKE_BUILD_TYPE " ${CMAKE_BUILD_TYPE})
 
-if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
-    # set the output directory for the debug version of the executable
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
-    # set the output directory for the debug version of the library file
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
+# if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+#     # set the output directory for the debug version of the executable
+#     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
+#     # set the output directory for the debug version of the library file
+#     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
 
-    # set the suffix of the library file of the debug version
-    # set(CMAKE_DEBUG_POSTFIX "_d")
-elseif(${CMAKE_BUILD_TYPE} MATCHES "Release")
-    # set the output directory for the release version of the executable
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
-    # set the output directory for the release version of the library file
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
+#     # set the suffix of the library file of the debug version
+#     # set(CMAKE_DEBUG_POSTFIX "_d")
+# elseif(${CMAKE_BUILD_TYPE} MATCHES "Release")
+#     # set the output directory for the release version of the executable
+#     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
+#     # set the output directory for the release version of the library file
+#     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
 
-    # set the suffix of the library file of the release version
-    # set(CMAKE_RELEASE_POSTFIX "_r")
-endif()
+#     # set the suffix of the library file of the release version
+#     # set(CMAKE_RELEASE_POSTFIX "_r")
+# endif()
 
-if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
-    message(STATUS "CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG})
-    message(STATUS "CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG " ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG})
-elseif(${CMAKE_BUILD_TYPE} MATCHES "Release")
-    message(STATUS "CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE})
-    message(STATUS "CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE " ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE})
-endif()
+# if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+#     message(STATUS "CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG})
+#     message(STATUS "CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG " ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG})
+# elseif(${CMAKE_BUILD_TYPE} MATCHES "Release")
+#     message(STATUS "CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE " ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE})
+#     message(STATUS "CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE " ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE})
+# endif()
 
 # message("EXECUTABLE_OUTPUT_PATH"  ${EXECUTABLE_OUTPUT_PATH})
 # message("LIBRARY_OUTPUT_PATH" ${LIBRARY_OUTPUT_PATH})
@@ -111,7 +117,7 @@ elseif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 endif()
 
 # set google test libraries path
-set(GOOGLE_TEST_LIB_PATH ${CMAKE_SOURCE_DIR}/extern/googletest/lib)
+set(GOOGLE_TEST_LIB_PATH ${CMAKE_SOURCE_DIR}/../extern/googletest/lib)
 set(GOOGLE_TEST_LIB_PATH ${GOOGLE_TEST_LIB_PATH}/${CURRENT_PLATFORM}/${BUILD_TYPE})
 message(STATUS "GOOGLE_TEST_LIB_PATH: " ${GOOGLE_TEST_LIB_PATH})
 
@@ -125,8 +131,6 @@ add_subdirectory("dir_opt")
 add_subdirectory("export")
 
 add_subdirectory("call")
-
-
 
 
 #=============Copy Source files to Build Runtime Dir=============== 
