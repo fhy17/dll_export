@@ -50,3 +50,6 @@ resource
 
 # version_info.rc
 version_info.rc
+
+x64
+x86
