@@ -34,3 +34,5 @@ endif()
 add_executable(${PROJECT_NAME} ${SRC_LIST} ${VERSIONINFO_RC})
 
 target_link_libraries(${PROJECT_NAME} dir_opt)
+
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX})

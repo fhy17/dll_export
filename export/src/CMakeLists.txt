@@ -30,3 +30,5 @@ endif()
 add_library(${PROJECT_NAME} SHARED ${SRC_LIST} ${VERSIONINFO_RC})
 
 # target_link_libraries(${PROJECT_NAME} file_version)
+
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX})
